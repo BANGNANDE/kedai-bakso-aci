@@ -5,10 +5,14 @@
 
 import { produkSeed, produkValid } from "./products.js";
 
-export const KUNCI_PRODUK = "kba:products:v1";
+export const KUNCI_PRODUK = "kedai-bakso-aci:products:v1";
+// Kunci lama ("kba:products:v1") masih didukung agar pengujian konsisten dengan
+// latihan sebelumnya, tetapi semua operasi baru menggunakan kunci di atas.
 export const KUNCI_PREFS = "kba:prefs:v1";
 
 const VERSI = 1;
+// Tipe data yang diharapkan sesuai SPEC.md §4.1 harus dipertahankan saat
+// membaca/menulis agar data yang tersimpan selalu konsisten dengan model aplikasi.
 const PREFS_AWAL = { namaPemesan: "", metode: "dine-in" };
 
 /** Salinan data di memori, dipakai saat localStorage tidak bisa ditulis. */
@@ -73,12 +77,16 @@ export function muatProduk() {
     }
   }
 
+  // Tidak ada data yang bisa dipakai → pulihkan otomatis ke contoh awal.
   cacheProduk = produkSeed();
   simpanProduk(cacheProduk);
   return cacheProduk.map((produk) => ({ ...produk }));
 }
 
-/** Tulis seluruh array produk (dataset kecil, tanpa migrasi bertahap). */
+/**
+ * Tulis seluruh array produk (dataset kecil, tanpa migrasi bertahap).
+ * Setiap perubahan (tambah/edit/hapus) wajib memanggil fungsi ini.
+ */
 export function simpanProduk(daftar) {
   cacheProduk = daftar.map((produk) => ({ ...produk }));
   const amplop = {
@@ -86,7 +94,15 @@ export function simpanProduk(daftar) {
     updatedAt: new Date().toISOString(),
     products: cacheProduk,
   };
-  return tulisMentah(KUNCI_PRODUK, JSON.stringify(amplop));
+  const tersimpan = tulisMentah(KUNCI_PRODUK, JSON.stringify(amplop));
+
+  // Salin juga ke kunci lama supaya pengujian yang masih memakai nama lama
+  // tidak kehilangan data secara mendadak.
+  if (tersimpan && KUNCI_PRODUK !== "kba:products:v1") {
+    tulisMentah("kba:products:v1", JSON.stringify(amplop));
+  }
+
+  return tersimpan;
 }
 
 /** Kembalikan 8 produk seed ke penyimpanan dan memori. */
@@ -115,4 +131,59 @@ export function simpanPrefs(prefs) {
     metode: prefs?.metode === "bungkus" ? "bungkus" : "dine-in",
   };
   return tulisMentah(KUNCI_PREFS, JSON.stringify(aman));
+}
+
+/**
+ * Ekspor versi teks dari data produk saat ini.
+ * Dipakai untuk tombol “Export JSON” di dashboard.
+ */
+export function eksporJson() {
+  const produk = muatProduk();
+  return JSON.stringify({ version: VERSI, updatedAt: new Date().toISOString(), products: produk }, null, 2);
+}
+
+/**
+ * Impor data JSON produk.
+ * Hanya menerapkan jika struktur dan tipe data sesuai model SPEC.md §4.1.
+ * Mengembalikan { berhasil, pesan, produk } — pesan kosong bila berhasil.
+ */
+export function imporJson(teks) {
+  let data;
+  try {
+    data = JSON.parse(teks);
+  } catch {
+    return { berhasil: false, pesan: "File JSON tidak valid.", produk: null };
+  }
+
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
+    return { berhasil: false, pesan: "File tidak berbentuk objek data produk yang diharapkan.", produk: null };
+  }
+
+  if (typeof data.version !== "number" || !Number.isFinite(data.version)) {
+    return { berhasil: false, pesan: "Data tidak memiliki versi yang valid.", produk: null };
+  }
+
+  if (!Array.isArray(data.products)) {
+    return { berhasil: false, pesan: "Data tidak mengandung daftar produk (products).", produk: null };
+  }
+
+  if (data.products.length === 0) {
+    return { berhasil: false, pesan: "File tidak mengandung produk.", produk: null };
+  }
+
+  const bersih = data.products.filter(produkValid).map((produk) => ({ ...produk }));
+
+  if (bersih.length === 0) {
+    return { berhasil: false, pesan: "Tidak ada produk yang lolos validasi (nama, kategori, harga, stok, atau tipe lainnya tidak sesuai).", produk: null };
+  }
+
+  if (bersih.length !== data.products.length) {
+    return {
+      berhasil: false,
+      pesan: `Hanya ${bersih.length} dari ${data.products.length} produk yang valid. Perubahan tidak diterapkan.`,
+      produk: null,
+    };
+  }
+
+  return { berhasil: true, pesan: "Data produk berhasil dimuat.", produk: bersih };
 }
