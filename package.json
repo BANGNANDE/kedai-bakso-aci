@@ -7,13 +7,19 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "devDependencies": {
     "@rollup/wasm-node": "^4.68.7",
+    "vitest": "^3.2.4",
     "vite": "^7.2.2"
   },
   "overrides": {
     "rollup": "npm:@rollup/wasm-node@^4.68.7"
+  },
+  "test": {
+    "environment": "node",
+    "globals": true
   }
 }

@@ -19,6 +19,15 @@ const PREFS_AWAL = { namaPemesan: "", metode: "dine-in" };
 let cacheProduk = null;
 let penyimpananGagal = false;
 
+/**
+ * Reset state internal module (hanya untuk keperluan testing).
+ * Dipanggil antar tes agar state tidak tercemar.
+ */
+export function resetStateInternal() {
+  cacheProduk = null;
+  penyimpananGagal = false;
+}
+
 /** True bila localStorage bisa dibaca dan ditulis (bukan mode privat/quota penuh). */
 export function penyimpananTersedia() {
   try {
