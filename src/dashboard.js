@@ -318,21 +318,8 @@ function produkById(id) {
 
 /** Render ulang katalog pembeli dari data terkini. */
 export function renderKatalog() {
-  const { filterProducts, SEMUA_KATEGORI: SEmua, URUTAN } = awaitImportFilter();
-  const daftar = filterProducts(produkAktif, { q: "", kategori: SEmua, sort: URUTAN.NAMA_ASC });
-  // panggil render dari ui.js
-  const { renderKatalog: renderKatalogUi } = awaitImportUi();
-  renderKatalogUi(filterProducts(produkAktif, { q: "", kategori: SEmua, sort: URUTAN.NAMA_ASC }));
-}
-
-async function awaitImportFilter() {
-  const mod = await import("./filter.js");
-  return { filterProducts: mod.filterProducts, SEMUA_KATEGORI: mod.SEMUA_KATEGORI, URUTAN: mod.URUTAN };
-}
-
-async function awaitImportUi() {
-  const mod = await import("./ui.js");
-  return { renderKatalog: mod.renderKatalog };
+  const daftar = filterProducts(produkAktif, { q: "", kategori: SEMUA_KATEGORI, sort: URUTAN.NAMA_ASC });
+  renderKatalogUi(daftar);
 }
 
 // ---
@@ -965,13 +952,7 @@ export function initDashboard() {
     tombolBatalHapus.addEventListener("click", batalkanHapus);
   }
 
-  // Tombol reset
-  const tombolReset = document.querySelector("#tombol-reset-demo");
-  if (tombolReset) {
-    tombolReset.addEventListener("click", () => {
-      initResetDemo();
-    });
-  }
+  // Tombol reset (dialog dibuka oleh initResetDemo yang dipanggil saat init)
 
   const tombolTerapkanReset = document.querySelector("#tombol-terapkan-reset");
   if (tombolTerapkanReset) {
@@ -1030,8 +1011,7 @@ export function initDanRender() {
   renderBannerPemulihan();
 
   initDashboard();
+  initResetDemo();
 }
 
-// Ekspor ulang dari modul lain agar saling ketergantungan tidak terjadi secara langsung.
-import { filterProducts, SEMUA_KATEGORI, URUTAN } from "./filter.js";
-import { renderKatalog as renderKatalogUi } from "./ui.js";
+// filterProducts, SEMUA_KATEGORI, URUTAN, dan renderKatalogUi sudah diimpor di atas.

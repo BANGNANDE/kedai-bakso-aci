@@ -29,6 +29,8 @@
       </a>
 
       <nav class="site-nav" aria-label="Navigasi utama">
+        <button class="site-nav__link" type="button" data-view="katalog" aria-current="page">Katalog</button>
+        <button class="site-nav__link" type="button" data-view="dashboard">Dashboard Pengelola</button>
         <a class="site-nav__link" href="#menu">Menu</a>
         <a
           class="site-nav__cta"
@@ -46,6 +48,7 @@
     </header>
 
     <main id="atas">
+      <div id="view-katalog">
       <section class="hero" aria-labelledby="hero-judul">
         <div class="hero__copy">
           <p class="status" id="status-toko" data-state="buka">
@@ -169,7 +172,107 @@
           Stok dapat berubah — konfirmasi ketersediaan lewat WhatsApp sebelum berkunjung.
         </p>
       </section>
+      </div>
+
+      <div id="view-dashboard" hidden>
+        <section class="dashboard" aria-labelledby="dashboard-judul">
+          <div id="banner-penyimpanan" hidden></div>
+          <div id="banner-pemulihan" hidden></div>
+
+          <div class="dashboard__head">
+            <div>
+              <p class="eyebrow">Dashboard Pengelola</p>
+              <h2 id="dashboard-judul">Kelola Menu</h2>
+              <p class="menu__lead">Tambah, ubah, hapus menu, serta export/import JSON dan reset demo.</p>
+            </div>
+          </div>
+
+          <div id="ringkasan-grid" class="ringkasan-grid"></div>
+
+          <div class="dashboard__toolbar">
+            <button class="btn btn--primary" type="button" id="tombol-tambah-menu">+ Tambah Menu</button>
+            <button class="btn btn--outline" type="button" id="tombol-export-json">Export JSON</button>
+            <button class="btn btn--outline" type="button" id="tombol-import-json">Import JSON</button>
+            <input type="file" id="input-import-json" accept="application/json" hidden />
+            <button class="btn btn--outline" type="button" id="tombol-reset-demo">Reset data demo</button>
+          </div>
+
+          <table id="daftar-dashboard" class="daftar-dashboard"></table>
+          <div id="daftar-mobile" class="daftar-mobile"></div>
+
+          <div id="ruang-kosong" class="empty-state" hidden>
+            <p class="empty-state__title">Belum ada menu</p>
+            <p class="empty-state__text">Tambah menu baru untuk memulai.</p>
+            <button class="btn btn--outline" type="button" id="tombol-tambah-kosong">+ Tambah Menu</button>
+          </div>
+        </section>
+      </div>
     </main>
+
+    <dialog id="dialog-form">
+      <div class="dialog__body">
+        <h3 id="judul-form">Tambah menu baru</h3>
+        <label for="input-form-nama">Nama</label>
+        <input id="input-form-nama" type="text" />
+        <p id="error-input-form-nama" hidden></p>
+
+        <label for="pilih-kategori">Kategori</label>
+        <select id="pilih-kategori">
+          <option value="">Pilih kategori</option>
+          <option value="Menu Utama">Menu Utama</option>
+          <option value="Ekstra Topping">Ekstra Topping</option>
+          <option value="Minuman">Minuman</option>
+        </select>
+        <p id="error-pilih-kategori" hidden></p>
+
+        <label for="input-form-harga">Harga</label>
+        <input id="input-form-harga" type="number" />
+        <p id="error-input-form-harga" hidden></p>
+
+        <label for="input-form-stok">Stok</label>
+        <input id="input-form-stok" type="number" />
+        <p id="error-input-form-stok" hidden></p>
+
+        <label for="input-form-deskripsi">Deskripsi</label>
+        <textarea id="input-form-deskripsi"></textarea>
+        <p id="error-input-form-deskripsi" hidden></p>
+
+        <label for="input-form-image">Image URL</label>
+        <input id="input-form-image" type="text" />
+        <p id="error-input-form-image" hidden></p>
+
+        <label><input type="checkbox" id="check-unggulan" /> Unggulan</label>
+
+        <div class="dialog__actions">
+          <button type="button" id="tombol-simpan">Simpan</button>
+          <button type="button" id="tombol-batal-form">Batal</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="dialog-hapus">
+      <div class="dialog__body">
+        <h3 id="hapus-judul">Hapus?</h3>
+        <p id="hapus-teks"></p>
+        <div class="dialog__actions">
+          <button type="button" id="tombol-hapus">Hapus</button>
+          <button type="button" id="tombol-batal-hapus">Batal</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="dialog-reset">
+      <div class="dialog__body">
+        <h3 id="reset-judul">Reset data demo?</h3>
+        <p id="reset-teks"></p>
+        <div class="dialog__actions">
+          <button type="button" id="tombol-terapkan-reset">Terapkan</button>
+          <button type="button" id="tombol-batal-reset">Batal</button>
+        </div>
+      </div>
+    </dialog>
+
+    <div id="toast-wadah"></div>
 
     <footer class="site-footer">
       <div class="site-footer__inner">
