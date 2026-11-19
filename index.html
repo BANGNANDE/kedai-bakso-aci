@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Katalog menu Kedai Bakso Aci, Pasraman Unud Jimbaran. Lihat harga dan stok, lalu pesan langsung lewat WhatsApp."
+    />
+    <title>Kedai Bakso Aci — Katalog &amp; Pesanan WhatsApp</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#katalog">Lewati ke menu</a>
+
+    <header class="site-header">
+      <a class="brand" href="#/">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75">
+            <path d="M3 11h18a9 9 0 0 1-18 0Z" />
+            <path d="M7 7c0-1.5 1-2 1-3M12 6c0-1.5 1-2 1-3M17 7c0-1.5 1-2 1-3" />
+          </svg>
+        </span>
+        <span class="brand__text">
+          <span class="brand__name">Kedai Bakso Aci</span>
+          <span class="brand__place">JIMBARAN</span>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Navigasi utama">
+        <a class="site-nav__link" href="#/">Pembeli</a>
+        <a class="site-nav__link" href="#/kelola">Pengelola (Demo)</a>
+      </nav>
+    </header>
+
+    <main id="app" tabindex="-1">
+      <section id="katalog" class="panel" aria-labelledby="katalog-judul">
+        <h1 id="katalog-judul" class="panel__title">Kedai Bakso Aci</h1>
+        <p class="panel__meta">Jl. Perum Pasraman Unud No.125 Blk B, Jimbaran</p>
+        <p class="panel__meta">Selasa–Minggu 11.00–21.00 WITA · Senin tutup</p>
+        <p id="status-fondasi" class="panel__note" role="status">Memuat data menu…</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Kedai Bakso Aci · Jimbaran · <a href="tel:+6285858754176">+62 858-5875-4176</a></p>
+      <p class="site-footer__note">Mode demo — data tersimpan di perangkat ini.</p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
