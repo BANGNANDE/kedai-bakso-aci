@@ -1,24 +1,60 @@
 /**
- * Bootstrap aplikasi: muat data, pasang routing hash, dan render awal.
- * Katalog (M2) dan dashboard (M5) akan mengisi modul ui.js berikutnya.
+ * Bootstrap halaman landing: render status buka, katalog, dan kontrol filter.
  */
 
-import { muatProduk, penyimpananGagalTerakhir, penyimpananTersedia } from "./store.js";
-import { renderStatusFondasi, tandaiNavigasiAktif } from "./ui.js";
+import { produkSeed } from "./products.js";
+import { filterProducts, SEMUA_KATEGORI, URUTAN } from "./filter.js";
+import { renderKatalog, renderStatusBuka } from "./ui.js";
 
-const produk = muatProduk();
+const produk = produkSeed();
+const state = { q: "", kategori: SEMUA_KATEGORI, sort: URUTAN.NAMA_ASC };
+
+const inputCari = document.querySelector("#cari-menu");
+const pilihUrut = document.querySelector("#urut-menu");
+const chipKategori = document.querySelectorAll(".chip[data-kategori]");
+const tombolReset = document.querySelector("#reset-filter");
 
 function render() {
-  // Routing hash: "#/" katalog, "#/kelola" dashboard demo.
-  const hash = window.location.hash || "#/";
-  tandaiNavigasiAktif(hash);
-  renderStatusFondasi(produk);
+  renderKatalog(filterProducts(produk, state));
 }
 
-if (!penyimpananTersedia() || penyimpananGagalTerakhir()) {
-  const catatan = document.querySelector("#status-fondasi");
-  if (catatan) catatan.dataset.penyimpanan = "gagal";
+function setKategori(kategori) {
+  state.kategori = kategori;
+  chipKategori.forEach((chip) => {
+    chip.setAttribute("aria-pressed", String(chip.dataset.kategori === kategori));
+  });
 }
 
-window.addEventListener("hashchange", render);
+inputCari?.addEventListener("input", (event) => {
+  state.q = event.target.value;
+  render();
+});
+
+pilihUrut?.addEventListener("change", (event) => {
+  state.sort = event.target.value;
+  render();
+});
+
+chipKategori.forEach((chip) => {
+  chip.addEventListener("click", () => {
+    setKategori(chip.dataset.kategori);
+    render();
+  });
+});
+
+tombolReset?.addEventListener("click", () => {
+  state.q = "";
+  state.sort = URUTAN.NAMA_ASC;
+  setKategori(SEMUA_KATEGORI);
+
+  if (inputCari) {
+    inputCari.value = "";
+    inputCari.focus();
+  }
+  if (pilihUrut) pilihUrut.value = URUTAN.NAMA_ASC;
+
+  render();
+});
+
+renderStatusBuka();
 render();

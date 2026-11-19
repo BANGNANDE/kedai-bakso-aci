@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Katalog menu Kedai Bakso Aci, Pasraman Unud Jimbaran. Lihat harga dan stok, lalu pesan langsung lewat WhatsApp."
+      content="Kedai Bakso Aci, Pasraman Unud Jimbaran. Lihat menu, harga, dan stok bakso aci, lalu pesan langsung lewat WhatsApp."
     />
-    <title>Kedai Bakso Aci — Katalog &amp; Pesanan WhatsApp</title>
+    <meta name="theme-color" content="#FFF9F0" />
+    <title>Kedai Bakso Aci — Bakso Aci Jimbaran</title>
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <a class="skip-link" href="#katalog">Lewati ke menu</a>
+    <a class="skip-link" href="#menu">Lewati ke menu</a>
 
     <header class="site-header">
-      <a class="brand" href="#/">
+      <a class="brand" href="#atas" aria-label="Kedai Bakso Aci — ke atas halaman">
         <span class="brand__mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
             <path d="M3 11h18a9 9 0 0 1-18 0Z" />
             <path d="M7 7c0-1.5 1-2 1-3M12 6c0-1.5 1-2 1-3M17 7c0-1.5 1-2 1-3" />
           </svg>
@@ -28,23 +29,156 @@
       </a>
 
       <nav class="site-nav" aria-label="Navigasi utama">
-        <a class="site-nav__link" href="#/">Pembeli</a>
-        <a class="site-nav__link" href="#/kelola">Pengelola (Demo)</a>
+        <a class="site-nav__link" href="#menu">Menu</a>
+        <a
+          class="site-nav__cta"
+          href="https://wa.me/6285858754176?text=Halo%20Kedai%20Bakso%20Aci%2C%20saya%20mau%20pesan.%20Boleh%20dibantu%3F"
+          target="_blank"
+          rel="noopener"
+        >
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+            <path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Z" />
+            <path d="M9.3 7.6c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.7 2.7 4.2 3.7 2 .8 2.4.7 2.9.6.4 0 1.3-.5 1.5-1s.2-1 .1-1.1c0-.1-.2-.2-.4-.3l-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.1-1.3-1.3-1.5-.1-.2 0-.3.1-.4l.4-.5c.1-.1.1-.2.2-.4 0-.1 0-.3 0-.4l-.6-1.6Z" />
+          </svg>
+          Pesan via WhatsApp
+        </a>
       </nav>
     </header>
 
-    <main id="app" tabindex="-1">
-      <section id="katalog" class="panel" aria-labelledby="katalog-judul">
-        <h1 id="katalog-judul" class="panel__title">Kedai Bakso Aci</h1>
-        <p class="panel__meta">Jl. Perum Pasraman Unud No.125 Blk B, Jimbaran</p>
-        <p class="panel__meta">Selasa–Minggu 11.00–21.00 WITA · Senin tutup</p>
-        <p id="status-fondasi" class="panel__note" role="status">Memuat data menu…</p>
+    <main id="atas">
+      <section class="hero" aria-labelledby="hero-judul">
+        <div class="hero__copy">
+          <p class="status" id="status-toko" data-state="buka">
+            <span class="status__dot" aria-hidden="true"></span>
+            <span class="status__label">Buka Sekarang</span>
+            <span class="status__meta">Dine-in &amp; Takeaway</span>
+          </p>
+
+          <h1 id="hero-judul" class="hero__title">Bakso aci pedas, gurih, ramah kantong mahasiswa.</h1>
+          <p class="hero__lead">
+            Bakso aci kenyal dengan kuah hangat dan sambal chili oil buatan sendiri. Mampir atau bungkus,
+            langsung dari Pasraman Unud, Jimbaran.
+          </p>
+
+          <ul class="hero__info">
+            <li>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z" />
+                <circle cx="12" cy="10" r="2.5" />
+              </svg>
+              <span>Jl. Perum Pasraman Unud No.125 Blk B, Jimbaran</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3.5 2" />
+              </svg>
+              <span>Selasa–Minggu 11.00–21.00 WITA · Senin tutup</span>
+            </li>
+          </ul>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#menu">
+              Lihat Menu
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 5v14M6 13l6 6 6-6" />
+              </svg>
+            </a>
+            <a
+              class="btn btn--outline"
+              href="https://wa.me/6285858754176?text=Halo%20Kedai%20Bakso%20Aci%2C%20saya%20mau%20pesan.%20Boleh%20dibantu%3F"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                <path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Z" />
+                <path d="M9.3 7.6c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.7 2.7 4.2 3.7 2 .8 2.4.7 2.9.6.4 0 1.3-.5 1.5-1s.2-1 .1-1.1c0-.1-.2-.2-.4-.3l-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.1-1.3-1.3-1.5-.1-.2 0-.3.1-.4l.4-.5c.1-.1.1-.2.2-.4 0-.1 0-.3 0-.4l-.6-1.6Z" />
+              </svg>
+              Pesan via WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="hero__visual">
+          <div class="hero__art">
+            <img src="/img/boci-mix.svg" alt="" aria-hidden="true" width="800" height="600" />
+            <p class="hero__sticker">★ Best Seller</p>
+          </div>
+          <p class="hero__caption">Boci Mix Bakso Sapi — favorit di Jimbaran.</p>
+        </div>
+      </section>
+
+      <section id="menu" class="menu" aria-labelledby="menu-judul">
+        <div class="menu__head">
+          <div>
+            <p class="eyebrow">Katalog</p>
+            <h2 id="menu-judul">Menu Kedai Bakso Aci</h2>
+            <p class="menu__lead">
+              Pilihan menu utama, ekstra topping, dan minuman. Semua harga dalam Rupiah.
+            </p>
+          </div>
+          <p class="menu__count" id="jumlah-menu" aria-live="polite"></p>
+        </div>
+
+        <div class="toolbar">
+          <div class="toolbar__row">
+            <div class="field">
+              <label class="sr-only" for="cari-menu">Cari menu</label>
+              <span class="field__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="m16.5 16.5 4 4" />
+                </svg>
+              </span>
+              <input
+                id="cari-menu"
+                class="field__input"
+                type="search"
+                placeholder="Cari menu, mis. mercon…"
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="sort">
+              <label class="sort__label" for="urut-menu">Urutkan</label>
+              <select id="urut-menu" class="sort__select">
+                <option value="nama-asc">Nama A–Z</option>
+                <option value="harga-asc">Harga termurah</option>
+                <option value="harga-desc">Harga termahal</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="chips" role="group" aria-label="Filter kategori">
+            <button class="chip" type="button" data-kategori="Semua" aria-pressed="true">Semua</button>
+            <button class="chip" type="button" data-kategori="Menu Utama" aria-pressed="false">Menu Utama</button>
+            <button class="chip" type="button" data-kategori="Ekstra Topping" aria-pressed="false">Ekstra Topping</button>
+            <button class="chip" type="button" data-kategori="Minuman" aria-pressed="false">Minuman</button>
+          </div>
+        </div>
+
+        <div id="daftar-produk" class="product-grid"></div>
+
+        <div class="empty-state" id="empty-state" role="status" hidden>
+          <p class="empty-state__title">Menu tidak ditemukan</p>
+          <p class="empty-state__text">Coba kata kunci lain atau reset filter.</p>
+          <button class="btn btn--outline" type="button" id="reset-filter">Reset filter</button>
+        </div>
+
+        <p class="menu__note">
+          Stok dapat berubah — konfirmasi ketersediaan lewat WhatsApp sebelum berkunjung.
+        </p>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Kedai Bakso Aci · Jimbaran · <a href="tel:+6285858754176">+62 858-5875-4176</a></p>
-      <p class="site-footer__note">Mode demo — data tersimpan di perangkat ini.</p>
+      <div class="site-footer__inner">
+        <p class="site-footer__name">Kedai Bakso Aci · Jimbaran</p>
+        <p>Jl. Perum Pasraman Unud No.125 Blk B, Jimbaran</p>
+        <p>Selasa–Minggu 11.00–21.00 WITA · Senin tutup</p>
+        <p><a href="tel:+6285858754176">+62 858-5875-4176</a></p>
+        <p class="site-footer__note">Harga dan stok contoh untuk keperluan demo.</p>
+      </div>
     </footer>
 
     <script type="module" src="/src/main.js"></script>
